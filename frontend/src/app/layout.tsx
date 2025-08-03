@@ -1,6 +1,6 @@
 
 import { Inter, Playfair_Display } from 'next/font/google'
-import './globals.css'
+import '../styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 const playfair = Playfair_Display({ 
@@ -15,10 +15,14 @@ export const metadata = {
   author: 'Michelle Almonte',
 }
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${playfair.variable}`}>
+      <body className={`${inter.className} ${playfair.variable} font-playfair`}>
         {children}
       </body>
     </html>

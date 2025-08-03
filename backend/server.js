@@ -19,16 +19,22 @@ const PORT = process.env.PORT || 5000;
  */
 const startServer = async () => {
   try {
-    // Test database connection
-    const connection = await db.getConnection();
-    console.log('✅ Database connected successfully');
-    connection.release();
+    // Test database connection (optional for development)
+    try {
+      const connection = await db.getConnection();
+      console.log('✅ Database connected successfully');
+      connection.release();
+    } catch (dbError) {
+      console.log('⚠️  Database connection failed (continuing without DB for development):', dbError.message);
+      console.log('📝 Note: Set up MySQL database to enable full functionality');
+    }
 
     // Start server
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+      console.log(`🔗 API Base: http://localhost:${PORT}/api`);
     });
 
   } catch (error) {

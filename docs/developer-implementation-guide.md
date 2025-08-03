@@ -36,8 +36,8 @@
 
 ```bash
 # Create main project directory
-mkdir michellealmonte-website
-cd michellealmonte-website
+mkdir michellealmonte.com
+cd michellealmonte.com
 
 # Create backend and frontend directories
 mkdir backend frontend
