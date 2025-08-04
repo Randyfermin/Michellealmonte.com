@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#5C3A2E] text-white">
       {/* Newsletter Section */}
-      <div className="bg-gradient-to-r from-[#D6A77A] to-[#5C3A2E] py-16">
+      <div className="bg-gradient-to-r from-[#5C3A2E] to-[#3D2419] py-16">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -80,10 +80,10 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-4">
+            <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-4 text-white">
               Style Tips & Inspiration
             </h3>
-            <p className="text-lg opacity-90 mb-8">
+            <p className="text-lg text-white opacity-90 mb-8">
               Join our exclusive newsletter for weekly style tips, color analysis insights, 
               and confidence-building strategies delivered to your inbox.
             </p>
@@ -123,7 +123,7 @@ const Footer: React.FC = () => {
               </Form.Item>
             </Form>
             
-            <p className="text-sm opacity-75 mt-4">
+            <p className="text-sm text-white opacity-75 mt-4">
               ✨ No spam, just style. Unsubscribe anytime.
             </p>
           </motion.div>
