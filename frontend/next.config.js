@@ -3,7 +3,7 @@
  * @path: frontend/next.config.js
  * @created: 2025-08-04
  * @modified: 2025-08-04
- * @description: Next.js configuration for Railway deployment
+ * @description: Next.js Railway deployment configuration
  * @author: Randolfo Fermin
  * @module: Frontend - Configuration
  */
@@ -11,25 +11,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  
+  // Ensure proper port binding for Railway
   experimental: {
-    outputFileTracingRoot: '/app',  // Fixed: make absolute path
+    outputFileTracingRoot: '/app',
   },
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-  },
-  async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    
-    if (!apiUrl) return [];
-    
-    const baseUrl = apiUrl.startsWith('http') 
-      ? apiUrl 
-      : `https://${apiUrl}`;
-      
+  
+  // Railway specific configuration
+  trailingSlash: false,
+  
+  async headers() {
     return [
       {
-        source: '/api/:path*',
-        destination: `${baseUrl}/api/:path*`,
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
       },
     ];
   },

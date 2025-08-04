@@ -5,10 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
-    "lint": "next lint"
-    
-    
+    "start": "node server.js",
+    "lint": "next lint"    
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.0",
