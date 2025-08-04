@@ -1,3 +1,233 @@
+
+# Code Documentation and Standards Guide - Michelle Almonte Website Project
+**Updated: 2025-08-03 | Project Status: Ready for Development Implementation**
+
+## COMPLETED TASKS ✅
+
+### Planning & Documentation Phase (100% Complete)
+- [x] **Project Analysis & Requirements** - Target market research, service offerings identified
+- [x] **Technical Architecture Design** - Backend/Frontend structure planned
+- [x] **Database Schema Design** - Complete with contacts, newsletter, admin tables
+- [x] **Development Plan** - 4-week timeline with daily milestones
+- [x] **Implementation Guide** - Comprehensive step-by-step guide created
+- [x] **Brand Identity** - Color scheme defined (Soft Ivory, Yellow Butter, Soft Terracotta, Rose Dust, Cocoa Brown)
+- [x] **Tech Stack Selection** - Node.js + Express, Next.js + Ant Design, MySQL + JWT, Railway.app
+- [x] **Project Structure** - Complete file/folder organization planned
+- [x] **Documentation Standards** - File headers, function documentation, and standards defined
+
+---
+
+## FILE HEADER STANDARDS
+For every source code file in the project, include the following standardized header:
+```javascript
+/**
+ * @file: [FILENAME]
+ * @path: [DIRECTORY_PATH/FILENAME]
+ * @created: [YYYY-MM-DD]
+ * @modified: [YYYY-MM-DD]
+ * @description: Brief description of the file's purpose and functionality
+ * @author: [AUTHOR_NAME] - Randolfo Fermin
+ * @module: [MODULE_NAME] - Which part of the system this file belongs to
+ */
+```
+
+## FUNCTION/METHOD DOCUMENTATION STANDARDS
+Document each function or method using this format:
+```javascript
+/**
+ * @function functionName
+ * @description Concise explanation of what the function does
+ * 
+ * @param {DataType} paramName - Description of parameter
+ * @param {DataType} paramName - Description of parameter
+ * 
+ * @returns {ReturnType} Description of what's returned
+ * 
+ * @example
+ * // Example usage of the function
+ * const result = functionName(param1, param2);
+ * 
+ * @throws {ErrorType} Description of potential errors
+ */
+```
+
+## CODE STRUCTURE STANDARDS
+
+### Consistent Indentation
+Use 2 spaces for indentation across all files.
+
+### Component Organization
+For React components, follow this structure:
+1. Imports
+2. Type definitions/interfaces
+3. Component function
+4. Helper functions
+5. Exports
+
+### API Endpoint Documentation
+For each API endpoint, include:
+```javascript
+/**
+ * @endpoint [METHOD] /api/path
+ * @description Purpose of this endpoint
+ * 
+ * @requestBody {Object} Description of request body
+ * @requestParam {DataType} paramName - Description
+ * 
+ * @responseBody {Object} Description of response
+ * @responseCode {200} Success scenario description
+ * @responseCode {4xx/5xx} Error scenario description
+ */
+```
+
+### Database Query Comments
+For complex queries:
+```javascript
+/**
+ * @query [QUERY_NAME]
+ * @description What this query accomplishes
+ * 
+ * @param {DataType} paramName - Description
+ * @returns {ResultType} Description of returned data
+ * 
+ * @optimization Notes about query optimization if applicable
+ */
+```
+
+## VERSION CONTROL STANDARDS
+
+### Commit Messages
+Structure commit messages as:
+```
+[TYPE]: Short description (50 chars or less)
+
+More detailed explanation if necessary. Keep line length under 72 
+characters. Explain what and why, not how.
+
+Related issue: #123
+```
+
+**Types include:**
+- FEAT: New feature
+- FIX: Bug fix
+- DOCS: Documentation changes
+- STYLE: Formatting, missing semi-colons, etc.
+- REFACTOR: Code restructuring
+- TEST: Adding tests
+- CHORE: Maintenance tasks
+
+### Branch Naming
+Follow pattern `type/short-description`:
+- feature/contact-form
+- bugfix/email-validation
+- hotfix/security-patch
+
+## TESTING DOCUMENTATION
+For test files:
+```javascript
+/**
+ * @test: [COMPONENT_OR_FUNCTION_BEING_TESTED]
+ * @description: What aspects are being tested
+ * 
+ * Test organization:
+ * - Describe block 1: What is being tested here
+ * - Describe block 2: What is being tested here
+ */
+```
+
+## ADDITIONAL DOCUMENTATION REQUIREMENTS
+
+### TODO Comments
+Use consistent format:
+```javascript
+// TODO(username): Description of what needs to be done
+// FIXME(username): Description of what needs to be fixed
+```
+
+### Deprecation Notices
+Mark deprecated code:
+```javascript
+/**
+ * @deprecated Since version X.Y.Z. Use newFunction() instead.
+ */
+```
+
+### Security Annotations
+For security-sensitive code:
+```javascript
+// SECURITY: Explanation of security considerations
+```
+
+## RAILWAY.COM DEPLOYMENT NOTES
+For configuration files related to Railway deployment:
+```javascript
+/**
+ * @deployment: Railway.com
+ * @environment: [ENVIRONMENT_NAME]
+ * @description: Purpose of this configuration
+ * 
+ * @variables:
+ * - VARIABLE_NAME: Description and purpose
+ * 
+ * @dependencies:
+ * - Service dependencies and versions
+ */
+```
+
+## GITHUB INTEGRATION NOTES
+For GitHub workflow files:
+```javascript
+/**
+ * @workflow: [WORKFLOW_NAME]
+ * @trigger: What triggers this workflow
+ * @description: What this workflow accomplishes
+ * 
+ * @jobs:
+ * - JOB_NAME: Purpose of this job
+ * 
+ * @secrets:
+ * - SECRET_NAME: Purpose (but not the value!)
+ */
+```
+
+## FILE ENDINGS
+Every source code file must end with:
+```javascript
+// End of File: [FILENAME]
+```
+
+---
+
+## TECH STACK SPECIFICATIONS
+- **Backend**: Node.js + Express
+- **Frontend**: Next.js + Ant Design
+- **Database**: MySQL + JWT  
+- **Hosting and Deploy**: Railway.app
+- **IDE**: VS Code + JavaScript running on Windows
+
+## PROJECT-SPECIFIC NOTES
+- **Project**: Michelle Almonte Image Consulting Website (www.michellealmonte.com)
+- **Type**: Single Page Website (SPA)
+- **Brand Colors**: Soft Ivory (#FAF8F5), Yellow Butter (#F9E4B7), Soft Terracotta (#D6A77A), Rose Dust (#D4A5A5), Cocoa Brown (#5C3A2E)
+- **Target**: Professional image consulting services with lead generation focus
+- **Timeline**: 4 weeks development and deployment
+
+## DEVELOPMENT PRINCIPLES
+- One person project - internal documentation only
+- No automation scripts for fixes - provide single step-by-step solutions
+- Test at end of development cycle
+- Stay within established project structure
+- Create resume for follow-up if complex tasks arise
+
+---
+
+## RESUME FOR FOLLOW-UP
+**Project**: Michelle Almonte Image Consulting Website  
+**Status**: Planning Complete - Ready for Development Implementation  
+**Next Phase**: Backend setup and database implementation  
+**Key Focus**: Professional, elegant design with brand colors and lead generation optimization  
+**Documentation**: All standards defined, comprehensive implementation guide available
+
 # Michelle Almonte Website - Developer Implementation Guide
 
 /**
