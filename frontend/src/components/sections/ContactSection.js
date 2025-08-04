@@ -101,7 +101,7 @@ const ContactSection = () => {
             </div>
 
             {/* What to Expect */}
-            <div className="bg-gradient-to-br from-yellow-butter to-soft-terracotta rounded-lg p-6 text-white">
+            <div className="bg-gradient-to-br from-yellow-butter to-soft-terracotta rounded-lg p-6 text-cocoa-brown">
               <h4 className="text-xl font-bold mb-4">What to Expect</h4>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start">
