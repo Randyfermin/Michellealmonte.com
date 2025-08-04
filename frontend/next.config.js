@@ -19,6 +19,8 @@ const nextConfig = {
   },
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    if (!apiUrl) return [];
     
     // Ensure URL has protocol
     const baseUrl = apiUrl?.startsWith('http') 

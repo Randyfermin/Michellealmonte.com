@@ -30,8 +30,14 @@ app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV 
+    environment: process.env.NODE_ENV,
+    port: PORT
   });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Michelle Almonte Backend API' });
 });
 
 // Start server
