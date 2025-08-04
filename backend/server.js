@@ -1,36 +1,20 @@
 /**
- * @deployment: Railway.com
- * @environment: Production
- * @description: Express server configured for Railway deployment
+ * @file: server.js
+ * @path: backend/server.js
+ * @created: 2025-08-04
+ * @modified: 2025-08-04
+ * @description: Express server with custom domain CORS
+ * @author: Randolfo Fermin
+ * @module: Backend - Server
  */
 
-const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
-require('dotenv').config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Security middleware
-app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://michellealmonte.com',
+  origin: [
+    'https://michellealmonte.com',
+    'https://www.michellealmonte.com',
+    'http://localhost:3000' // For development
+  ],
   credentials: true
 }));
-
-// Health check endpoint for Railway
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV 
-  });
-});
-
-// Start server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend server running on port ${PORT}`);
-});
-
-// End of File: server.js
