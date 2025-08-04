@@ -1,9 +1,9 @@
 /**
- * @file: next.config.js  
+ * @file: next.config.js
  * @path: frontend/next.config.js
  * @created: 2025-08-04
  * @modified: 2025-08-04
- * @description: Next.js Railway configuration
+ * @description: Next.js Railway static assets configuration
  * @author: Randolfo Fermin
  * @module: Frontend - Configuration
  */
@@ -12,10 +12,21 @@
 const nextConfig = {
   output: 'standalone',
   
-  // Remove any port-related configs - let Railway handle it
+  // Fix static asset serving
   experimental: {
     outputFileTracingRoot: '/app',
-  }
+  },
+  
+  // Ensure static assets are properly handled
+  trailingSlash: false,
+  
+  // Asset prefix for proper static file serving
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  
+  // Image configuration
+  images: {
+    unoptimized: true, // Fix for Railway deployment
+  },
 };
 
 module.exports = nextConfig;
