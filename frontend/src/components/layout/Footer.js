@@ -24,8 +24,8 @@ const Footer = () => {
           
           {/* Business Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4">{BUSINESS_INFO.NAME}</h3>
-            <p className="text-gray-200 mb-4">{BUSINESS_INFO.DESCRIPTION}</p>
+            <h3 className="text-gray-100 text-lg font-bold mb-4">{BUSINESS_INFO.NAME}</h3>
+            <p className="text-gray-100 mb-4">{BUSINESS_INFO.DESCRIPTION}</p>
             <div className="space-y-2 text-sm">
               <p>
                 <span className="font-medium">Email:</span> 
@@ -35,18 +35,18 @@ const Footer = () => {
               </p>
               <p>
                 <span className="font-medium">Hours:</span> 
-                <span className="text-gray-200 ml-1">{BUSINESS_INFO.HOURS}</span>
+                <span className="text-gray-100 ml-1">{BUSINESS_INFO.HOURS}</span>
               </p>
               <p>
                 <span className="font-medium">Location:</span> 
-                <span className="text-gray-200 ml-1">{BUSINESS_INFO.LOCATION}</span>
+                <span className="text-gray-100 ml-1">{BUSINESS_INFO.LOCATION}</span>
               </p>
             </div>
           </div>
 
           {/* Newsletter Signup */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Stay Connected</h3>
+            <h3 className="text-gray-100 text-lg font-bold mb-4">Stay Connected</h3>
             <p className="text-gray-200 mb-4">
               Subscribe to receive style tips and updates from Michelle.
             </p>
@@ -55,7 +55,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Follow Me</h3>
+            <h3 className="text-gray-100 text-lg font-bold mb-4">Follow Me</h3>
             <div className="flex space-x-4">
               <a
                 href={SOCIAL_LINKS.INSTAGRAM}
@@ -106,7 +106,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-300 mt-8 pt-8 text-center text-sm text-white">
+        <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm text-white">
           <p>&copy; {new Date().getFullYear()} {BUSINESS_INFO.NAME}. All rights reserved.</p>
           <p className="mt-1">
             Designed & Developed by{' '}
