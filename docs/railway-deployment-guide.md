@@ -319,7 +319,7 @@ Ensure your `frontend/package.json` includes:
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node .next/standalone/server.js",
     "lint": "next lint"
   }
 }
@@ -342,16 +342,24 @@ Create/update `frontend/next.config.js`:
 const nextConfig = {
   output: 'standalone',
   experimental: {
-    outputFileTracingRoot: '.',
+    outputFileTracingRoot: '/app',  // Fixed: make absolute path
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   async rewrites() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+    if (!apiUrl) return [];
+    
+    const baseUrl = apiUrl.startsWith('http') 
+      ? apiUrl 
+      : `https://${apiUrl}`;
+      
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+        destination: `${baseUrl}/api/:path*`,
       },
     ];
   },
