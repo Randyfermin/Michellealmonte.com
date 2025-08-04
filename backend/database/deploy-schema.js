@@ -24,19 +24,56 @@ const deploySchema = async () => {
   
   try {
     console.log('🔍 Connecting to Railway MySQL database...');
+    console.log('🔍 Available environment variables:');
     
-    // Connect using Railway environment variables
-    connection = await mysql.createConnection({
-      host: process.env.MYSQLHOST,
-      port: process.env.MYSQLPORT || 3306,
-      user: process.env.MYSQLUSER,
-      password: process.env.MYSQLPASSWORD,
-      database: process.env.MYSQLDATABASE,
-      multipleStatements: true
-    });
+    // Log available environment variables for debugging
+    Object.keys(process.env)
+      .filter(key => key.includes('MYSQL') || key.includes('DATABASE'))
+      .forEach(key => console.log(`   ${key}: ${key.includes('PASSWORD') ? '***' : process.env[key]}`));
+    
+    // Try multiple possible variable naming conventions Railway might use
+    let connectionConfig;
+    
+    // Option 1: DATABASE_URL (most common with Railway)
+    if (process.env.DATABASE_URL) {
+      console.log('📌 Using DATABASE_URL connection');
+      connectionConfig = process.env.DATABASE_URL;
+    }
+    // Option 2: Individual MYSQL variables
+    else if (process.env.MYSQLHOST) {
+      console.log('📌 Using individual MYSQL variables');
+      connectionConfig = {
+        host: process.env.MYSQLHOST,
+        port: process.env.MYSQLPORT || 3306,
+        user: process.env.MYSQLUSER,
+        password: process.env.MYSQLPASSWORD,
+        database: process.env.MYSQLDATABASE,
+        multipleStatements: true
+      };
+    }
+    // Option 3: Railway's service-prefixed variables
+    else if (process.env.database_MYSQLHOST) {
+      console.log('📌 Using Railway service-prefixed variables');
+      connectionConfig = {
+        host: process.env.database_MYSQLHOST,
+        port: process.env.database_MYSQLPORT || 3306,
+        user: process.env.database_MYSQLUSER,
+        password: process.env.database_MYSQLPASSWORD,
+        database: process.env.database_MYSQLDATABASE,
+        multipleStatements: true
+      };
+    }
+    else {
+      throw new Error('No valid database connection variables found');
+    }
+    
+    connection = await mysql.createConnection(connectionConfig);
 
     console.log('✅ Connected to database successfully');
-    console.log(`📋 Database: ${process.env.MYSQLDATABASE}`);
+    
+    // Log database name if available
+    const dbName = process.env.MYSQLDATABASE || process.env.database_MYSQLDATABASE || 'Unknown';
+    console.log(`📋 Database: ${dbName}`);
 
     // Drop existing tables to avoid conflicts (if they exist)
     console.log('🗑️ Dropping existing tables (if any)...');
@@ -168,12 +205,18 @@ const deploySchema = async () => {
   }
 };
 
-// Check for required environment variables
-const requiredVars = ['MYSQLHOST', 'MYSQLUSER', 'MYSQLPASSWORD', 'MYSQLDATABASE'];
-const missingVars = requiredVars.filter(varName => !process.env[varName]);
+// Check for database connection variables (multiple possible formats)
+const hasDatabase = process.env.DATABASE_URL || 
+                   (process.env.MYSQLHOST && process.env.MYSQLUSER && process.env.MYSQLPASSWORD && process.env.MYSQLDATABASE) ||
+                   (process.env.database_MYSQLHOST && process.env.database_MYSQLUSER && process.env.database_MYSQLPASSWORD && process.env.database_MYSQLDATABASE);
 
-if (missingVars.length > 0) {
-  console.error('❌ Missing required environment variables:', missingVars);
+if (!hasDatabase) {
+  console.error('❌ No valid database connection variables found.');
+  console.error('Expected one of:');
+  console.error('  - DATABASE_URL');
+  console.error('  - MYSQLHOST, MYSQLUSER, MYSQLPASSWORD, MYSQLDATABASE');
+  console.error('  - database_MYSQLHOST, database_MYSQLUSER, database_MYSQLPASSWORD, database_MYSQLDATABASE');
+  console.error('\nRun "railway variables" to see available environment variables.');
   process.exit(1);
 }
 
