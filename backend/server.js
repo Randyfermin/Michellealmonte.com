@@ -1,48 +1,69 @@
 /**
- * @deployment: Railway.com
- * @environment: Production
- * @description: Express server configured for Railway deployment
+ * @file: server.js
+ * @path: backend/server.js
+ * @created: 2025-08-03
+ * @modified: 2025-08-04
+ * @description: Server entry point with proper route imports
+ * @author: Randolfo Fermin
+ * @module: Backend - Server
  */
 
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-require('dotenv').config();
+const app = require('./app');
+const db = require('./config/database');
 
-const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Security middleware
-app.use(helmet());
-app.use(cors());
+/**
+ * @function startServer
+ * @description Starts the Express server with all routes
+ */
+const startServer = async () => {
+  try {
+    // Test database connection
+    console.log('🔍 Testing database connection...');
+    const connection = await db.getConnection();
+    console.log('✅ Database connected successfully');
+    connection.release();
 
-app.use(cors({
-  origin: [
-    'https://michellealmonte.com',
-    'https://www.michellealmonte.com',
-    'http://localhost:3000' // For development
-  ],
-  credentials: true
-}));
+    // Start server
+    const server = app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+      console.log(`📧 Contact API: http://localhost:${PORT}/api/contact`);
+    });
 
-// Health check endpoint for Railway
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
-    port: PORT
-  });
+    // Graceful shutdown handlers
+    const gracefulShutdown = () => {
+      console.log('🛑 Shutting down gracefully...');
+      server.close(() => {
+        console.log('✅ Server closed');
+        process.exit(0);
+      });
+    };
+
+    process.on('SIGTERM', gracefulShutdown);
+    process.on('SIGINT', gracefulShutdown);
+
+  } catch (error) {
+    console.error('❌ Failed to start server:', error);
+    process.exit(1);
+  }
+};
+
+// Handle unhandled rejections
+process.on('unhandledRejection', (err) => {
+  console.error('❌ Unhandled Promise Rejection:', err);
+  process.exit(1);
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.json({ message: 'Michelle Almonte Backend API' });
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+  process.exit(1);
 });
 
-// Start server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend server running on port ${PORT}`);
-});
+// Start the server
+startServer();
 
 // End of File: server.js
