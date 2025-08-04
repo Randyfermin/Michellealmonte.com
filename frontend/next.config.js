@@ -12,18 +12,17 @@
 const nextConfig = {
   output: 'standalone',
   experimental: {
-    outputFileTracingRoot: '.',
+    outputFileTracingRoot: '/app',  // Fixed: make absolute path
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+    
     if (!apiUrl) return [];
     
-    // Ensure URL has protocol
-    const baseUrl = apiUrl?.startsWith('http') 
+    const baseUrl = apiUrl.startsWith('http') 
       ? apiUrl 
       : `https://${apiUrl}`;
       
