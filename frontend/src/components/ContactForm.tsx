@@ -22,7 +22,7 @@ import {
   LoadingOutlined 
 } from '@ant-design/icons';
 import { submitContactForm } from '../utils/api';
-import { SERVICE_OPTIONS, CONSULTATION_TYPES, BUDGET_RANGES } from '../utils/constants';
+import { SERVICE_OPTIONS, CONSULTATION_OPTIONS, BUDGET_OPTIONS } from '../utils/constants';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -260,7 +260,7 @@ const ContactForm: React.FC = () => {
                       size="large"
                       className="rounded-lg"
                     >
-                      {CONSULTATION_TYPES.map((option) => (
+                      {CONSULTATION_OPTIONS.map((option) => (
                         <Option key={option.value} value={option.value}>
                           {option.label}
                         </Option>
@@ -280,7 +280,7 @@ const ContactForm: React.FC = () => {
                   size="large"
                   className="rounded-lg"
                 >
-                  {BUDGET_RANGES.map((option) => (
+                  {BUDGET_OPTIONS.map((option) => (
                     <Option key={option.value} value={option.value}>
                       {option.label}
                     </Option>

@@ -11,22 +11,25 @@
 'use client';
 
 import React from 'react';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Services from '../components/Services';
-import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
+import Layout from '../components/layout/Layout';
+import HeroSection from '../components/sections/HeroSection';
+import AboutSection from '../components/sections/AboutSection';
+import ServicesSection from '../components/sections/ServicesSection';
+import ProcessSection from '../components/sections/ProcessSection';
+import TestimonialsSection from '../components/sections/TestimonialsSection';
+import ContactSection from '../components/sections/ContactSection';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Header />
-      <Hero />
-      <About />
-      <Services />
-      <ContactForm />
-      <Footer />
-    </main>
+    <Layout>
+      <main className="min-h-screen">
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <ProcessSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </main>
+    </Layout>
   );
 }

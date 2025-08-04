@@ -17,6 +17,7 @@ import { Form, Input, Button, message } from 'antd';
 import { 
   MailOutlined, 
   InstagramOutlined, 
+  FacebookOutlined,
   LinkedinOutlined,
   HeartOutlined,
   SendOutlined
@@ -152,22 +153,22 @@ const Footer: React.FC = () => {
               {/* Social Links */}
               <div className="flex space-x-4">
                 <a
-                  href={SOCIAL_LINKS.INSTAGRAM_MAIN}
+                  href={SOCIAL_LINKS.INSTAGRAM}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-[#D6A77A] rounded-full flex items-center justify-center text-white hover:bg-[#F9E4B7] hover:text-[#5C3A2E] transition-all duration-300"
-                  aria-label="Instagram Main"
+                  aria-label="Instagram"
                 >
                   <InstagramOutlined />
                 </a>
                 <a
-                  href={SOCIAL_LINKS.INSTAGRAM_SECONDARY}
+                  href={SOCIAL_LINKS.FACEBOOK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-[#D6A77A] rounded-full flex items-center justify-center text-white hover:bg-[#F9E4B7] hover:text-[#5C3A2E] transition-all duration-300"
-                  aria-label="Instagram Secondary"
+                  aria-label="Facebook"
                 >
-                  <InstagramOutlined />
+                  <FacebookOutlined />
                 </a>
                 <a
                   href={SOCIAL_LINKS.LINKEDIN}
