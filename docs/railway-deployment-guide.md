@@ -290,7 +290,7 @@ railway service frontend
 
 # Set environment variables
 railway variables --set "NODE_ENV=production"
-railway variables --set "NEXT_PUBLIC_API_URL=${{backend.RAILWAY_PUBLIC_DOMAIN}}"
+railway variables --set "NEXT_PUBLIC_API_URL=${{railway.RAILWAY_PUBLIC_DOMAIN}}"
 ```
 
 ### 6.2 Frontend Railway Configuration  

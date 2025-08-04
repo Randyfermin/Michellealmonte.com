@@ -1,61 +1,36 @@
 /**
- * @file: server.js
- * @path: backend/server.js
- * @created: 2025-08-03
- * @modified: 2025-08-03
- * @description: Server entry point
- * @author: Randolfo Fermin
- * @module: Backend - Server
+ * @deployment: Railway.com
+ * @environment: Production
+ * @description: Express server configured for Railway deployment
  */
 
-const app = require('./app');
-const db = require('./config/database');
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+require('dotenv').config();
 
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-/**
- * @function startServer
- * @description Starts the Express server
- */
-const startServer = async () => {
-  try {
-    // Test database connection (optional for development)
-    try {
-      const connection = await db.getConnection();
-      console.log('✅ Database connected successfully');
-      connection.release();
-    } catch (dbError) {
-      console.log('⚠️  Database connection failed (continuing without DB for development):', dbError.message);
-      console.log('📝 Note: Set up MySQL database to enable full functionality');
-    }
+// Security middleware
+app.use(helmet());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'https://michellealmonte.com',
+  credentials: true
+}));
 
-    // Start server
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-      console.log(`🔗 API Base: http://localhost:${PORT}/api`);
-    });
-
-  } catch (error) {
-    console.error('❌ Failed to start server:', error);
-    process.exit(1);
-  }
-};
-
-// Handle unhandled rejections
-process.on('unhandledRejection', (err) => {
-  console.error('❌ Unhandled Promise Rejection:', err);
-  process.exit(1);
+// Health check endpoint for Railway
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV 
+  });
 });
 
-// Handle uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err);
-  process.exit(1);
+// Start server
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend server running on port ${PORT}`);
 });
-
-// Start the server
-startServer();
 
 // End of File: server.js
