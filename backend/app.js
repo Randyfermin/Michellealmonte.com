@@ -2,8 +2,8 @@
  * @file: app.js
  * @path: backend/app.js
  * @created: 2025-08-03
- * @modified: 2025-08-03
- * @description: Express application configuration
+ * @modified: 2025-08-04
+ * @description: Express application configuration with fixed CORS
  * @author: Randolfo Fermin
  * @module: Backend - Application
  */
@@ -23,13 +23,19 @@ const app = express();
 // Security middleware
 app.use(helmet());
 
-// CORS configuration
+// CORS configuration - Updated to include Railway frontend domain
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://www.michellealmonte.com', 'https://michellealmonte.com']
+    ? [
+        'https://www.michellealmonte.com', 
+        'https://michellealmonte.com',
+        'https://frontend-production-cd7e.up.railway.app' // Add Railway frontend domain
+      ]
     : ['http://localhost:3000', 'http://127.0.0.1:3000'],
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
@@ -46,7 +52,9 @@ app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Server is running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
+    corsOrigins: corsOptions.origin
   });
 });
 
